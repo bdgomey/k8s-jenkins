@@ -18,5 +18,5 @@ spec:
   - name: docker
     image: docker
     command:
-    - sleep 3600
+    - cat
     tty: true
