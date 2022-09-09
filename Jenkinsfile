@@ -4,6 +4,9 @@ pipeline {
       yamlFile 'pod.yaml'
     }
   }
+environment {
+    registryCredentials = 'docker'
+    }
   stages {
     stage('Run maven') {
       steps {
@@ -13,7 +16,17 @@ pipeline {
         container('busybox') {
           sh '/bin/busybox'
         }
+        container('docker') {
+          script {
+             script {
+                dockerImage = docker.build("bjgomes/jenkins")
+                docker.withRegistry('', registryCredentials) {
+                    dockerImage.push()
+                }
+            }
+          }
+        }
       }
     }
-  }
+}
 }
