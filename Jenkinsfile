@@ -18,11 +18,9 @@ environment {
         }
         container('docker') {
           script {
-             script {
                 dockerImage = docker.build("bjgomes/jenkins")
                 docker.withRegistry('', registryCredentials) {
                     dockerImage.push()
-                }
             }
           }
         }
