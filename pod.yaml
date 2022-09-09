@@ -15,8 +15,8 @@ spec:
     command:
     - cat
     tty: true
-  - name: python
-    image: python:alpine
+  - name: docker
+    image: docker
     command:
-    - cat
+    - sleep 3600
     tty: true
