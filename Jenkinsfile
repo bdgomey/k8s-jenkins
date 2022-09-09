@@ -16,7 +16,7 @@ environment {
         container('busybox') {
           sh '/bin/busybox'
         }
-        container('docker') {
+        container('kaniko') {
           script {
                 dockerImage = docker.build("bjgomes/jenkins")
                 docker.withRegistry('', registryCredentials) {
