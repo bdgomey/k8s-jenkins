@@ -15,3 +15,8 @@ spec:
     command:
     - cat
     tty: true
+  - name: python
+    image: python:alpine
+    command:
+    - cat
+    tty: true
