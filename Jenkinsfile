@@ -4,27 +4,17 @@ pipeline {
       yamlFile 'pod.yaml'
     }
   }
-environment {
-    registryCredentials = 'docker'
-    }
   stages {
-    stage('Run maven') {
+    stage('Build with Kaniko') {
       steps {
-        container('maven') {
-          sh 'mvn -version'
-        }
-        container('busybox') {
-          sh '/bin/busybox'
-        }
-        container('kaniko') {
-          script {
-                dockerImage = docker.build("bjgomes/jenkins")
-                docker.withRegistry('', registryCredentials) {
-                    dockerImage.push()
-            }
-          }
+        container(name: 'kaniko', shell: '/busybox/sh') {
+          sh '''#!/busybox/sh
+            echo "FROM jenkins/inbound-agent:latest" > Dockerfile
+            /kaniko/executor --context `pwd` --destination bjgomes/hello-kaniko:latest
+          '''
         }
       }
     }
+  }
 }
-}
+ 
