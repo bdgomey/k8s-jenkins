@@ -78,6 +78,7 @@ RUN jenkins-plugin-cli --plugins pam-auth
 RUN jenkins-plugin-cli --plugins email-ext
 RUN jenkins-plugin-cli --plugins ldap
 RUN jenkins-plugin-cli --plugins blueocean
+RUN jenkins-plugin-cli --plugins docker-workflow
 
 # Scaling
 RUN jenkins-plugin-cli --plugins kubernetes
