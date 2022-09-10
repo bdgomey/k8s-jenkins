@@ -21,6 +21,7 @@ spec:
       labels:
         app:  jenkins
     spec:
+      serviceAccountName: jenkins
       containers:
       - name:  jenkins
         image:  bjgomes/jenkins:latest
