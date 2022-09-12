@@ -8,11 +8,11 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: 8080
-      name: tcp
-      protocol: tcp
+      number: 80
+      name: http
+      protocol: http
     hosts:
-    - jenkins-np.jenkins.svc.cluster.local
+    - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -21,14 +21,12 @@ metadata:
   name: jenkins
 spec:
   hosts:
-  - jenkins-np.jenkins.svc.cluster.local
+  - "*"
   gateways:
   - gateway
-  tcp:
-  - match:
-    - port: 8080
-    route:
+  http:
+  - route:
     - destination:
         host: jenkins-np.jenkins.svc.cluster.local
         port:
-          number: 8080
+          number: 80

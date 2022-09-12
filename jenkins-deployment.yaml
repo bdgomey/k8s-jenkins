@@ -32,9 +32,9 @@ spec:
           value: -Djenkins.install.runSetupWizard=false
         ports:
         - containerPort:  8080
-          name:  http-jenkins
+          name:  jenkins
         - containerPort:  50000
-          name:  http-jnlp
+          name:  jnlp
         volumeMounts:
         - name: jenkins
           mountPath: /var/jenkins_home
@@ -58,11 +58,11 @@ spec:
     app: jenkins
   type: NodePort
   ports:
-  - name: http-jenkins
+  - name: jenkins
     protocol: TCP
-    port: 8080
+    port: 80
     targetPort: 8080
-  - name: http-jnlp
+  - name: jnlp
     protocol: TCP
     port: 50000
     targetPort: 50000
